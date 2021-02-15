@@ -8,22 +8,39 @@ class Window(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         self.image = QImage("a.png")
-        self.translateX = 0
-        self.translateY = 0
-        self.rotateAngle = 0
-        self.scaleRatio = 1
+        transform = QTransform()
+        self.transform = transform
     
     def keyPressEvent(self, keyEvent):
+        transform = QTransform()
+        if keyEvent.key() == Qt.Key_Up:
+            transform.translate(0,8)
+            self.repaint()
+        if keyEvent.key() == Qt.Key_Down:
+            transform.translate(0,-8)
+            self.repaint()
+        if keyEvent.key() == Qt.Key_R:
+            transform.rotate(1)
+            self.repaint()
+        if keyEvent.key() == Qt.Key_T:
+            transform.rotate(-1)
+            self.repaint()
         if keyEvent.key() == Qt.Key_S:
-            self.translateY += 10
+            transform.scale(1.01,1.01)
+            self.repaint()
+        if keyEvent.key() == Qt.Key_D:
+            transform.scale(0.99,0.99)
+            self.repaint()
+        self.transform *= transform
     def paintEvent(self, paintEvent):
         painter = QPainter(self)
+        painter.setRenderHint(QPainter.HighQualityAntialiasing,True)
 
         image = self.image
-        painter.translate(self.width()/2,self.height()/2)
-        painter.translate(self.translateX,self.translateY)
-        painter.rotate(self.rotateAngle)
-        painter.scale(self.scaleRatio,self.scaleRatio)
+        transform = QTransform()
+        transform.translate(self.width()/2,self.height()/2)
+        transform = self.transform * transform
+        painter.setTransform(transform)
 
         painter.drawImage(-image.width()/2,-image.height()/2,image)
 
