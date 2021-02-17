@@ -1,0 +1,4 @@
+{
+  "ppt": {"up": "pageupCtl", "down": "pagedownCtl"},
+  "picture": {"up": "leftCtl", "down": "rightCtl"},
+}
