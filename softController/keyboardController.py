@@ -1,5 +1,7 @@
 from pynput import keyboard
 
+# 模拟键盘控制
+
 # 创建键盘实例
 kb = keyboard.Controller()
 
@@ -62,8 +64,9 @@ def leftCtl():
 
 
 def rightCtl():
+    print("right key")
     with kb.pressed(
-            keyboard.Key.page_down
+            keyboard.Key.right
     ):
         pass
 

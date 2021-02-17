@@ -1,4 +1,72 @@
 {
-  "ppt": {"up": "pageupCtl", "down": "pagedownCtl"},
-  "picture": {"up": "leftCtl", "down": "rightCtl"},
+  "init": {
+    "click": "1",
+    "panLeft": "2",
+    "panRight":"3",
+    "enlarge": "",
+    "narrow": "",
+    "grab": "",
+    "clockwiseRotation": "",
+    "counterClockwiseRotation": ""
+  },
+    "ppt": {
+    "click": "222",
+    "panLeft": "rightCtl",
+    "panRight":"leftCtl",
+    "enlarge": "",
+    "narrow": "",
+    "grab": "",
+    "clockwiseRotation": "",
+    "counterClockwiseRotation": ""
+  },
+  "picture": {
+    "click": "",
+    "panLeft": "",
+    "panRight":"",
+    "enlarge": "",
+    "narrow": "",
+    "grab": "",
+    "clockwiseRotation": "",
+    "counterClockwiseRotation": ""
+  },
+    "tencent meeting": {
+    "click": "",
+    "panLeft": "",
+    "panRight":"",
+    "enlarge": "",
+    "narrow": "",
+    "grab": "",
+    "clockwiseRotation": "",
+    "counterClockwiseRotation": ""
+  },
+    "system": {
+    "click": "",
+    "panLeft": "",
+    "panRight":"",
+    "enlarge": "",
+    "narrow": "",
+    "grab": "",
+    "clockwiseRotation": "",
+    "counterClockwiseRotation": ""
+  },
+  "custom1": {
+    "click": "",
+    "panLeft": "",
+    "panRight":"",
+    "enlarge": "",
+    "narrow": "",
+    "grab": "",
+    "clockwiseRotation": "",
+    "counterClockwiseRotation": ""
+  },
+    "custom2": {
+    "click": "",
+    "panLeft": "",
+    "panRight":"",
+    "enlarge": "",
+    "narrow": "",
+    "grab": "",
+    "clockwiseRotation": "",
+    "counterClockwiseRotation": ""
+  }
 }
