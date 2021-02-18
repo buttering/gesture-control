@@ -1,10 +1,13 @@
 from softController import jsonConfig
 from softController import keyboardController
+from softController import processListener
 import time
 
 
 class modeDAO:
     """存储当前软件模式(mode)中不同手势(gesture)所对应操作(operation)"""
+
+    modeName = ""
 
     click = ""
     panLeft = ""
@@ -32,6 +35,7 @@ class modeDAO:
             keyboardController.rightCtl()
         elif operation == "taskCtl":
             keyboardController.taskCtl()
+            self.setOperation("system")
         elif operation == "endCtl":
             keyboardController.endCtl()
         elif operation == "homeCtl":
@@ -48,6 +52,10 @@ class modeDAO:
             keyboardController.pictureClockWiseRotationCtl()
         elif operation == "enterCtl":
             keyboardController.enterCtl()
+            time.sleep(0.01)  # 等待焦点切换完成
+            pname = processListener.active_window_process_name()
+            modeType = processListener.processMap(pname)
+            self.setOperation(modeType)
         elif operation == "volumeUpCtl":
             keyboardController.volumeUpCtl()
         elif operation == "volumeDownCtl":
@@ -55,9 +63,18 @@ class modeDAO:
 
 
 if __name__ == '__main__':
-    modeType = "tencent meeting"
-    gesture = "narrow"
+    # modeType = "tencent meeting"
+    # gesture = "narrow"
+    # mode = modeDAO()
+    # mode.setOperation(modeType)
+    # time.sleep(2)
+    # mode.callOperation(gesture)
     mode = modeDAO()
-    mode.setOperation(modeType)
-    time.sleep(2)
-    mode.callOperation(gesture)
+    print(mode.modeName, mode.click)
+    mode.callOperation("click")
+    print(mode.modeName, mode.click)
+    time.sleep(0.5)
+    mode.callOperation("panRight")
+    time.sleep(0.5)
+    mode.callOperation("click")
+    print(mode.modeName, mode.click)

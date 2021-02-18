@@ -13,6 +13,8 @@ def readMode(modeClass, modeType: str):
     with open(jsonPath) as fp:
         mode = json.load(fp)[modeType]
 
+    modeClass.modeName = modeType
     for key, value in mode.items():
         setattr(modeClass, key, value)
+
 

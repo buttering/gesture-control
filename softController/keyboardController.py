@@ -60,7 +60,7 @@ def leftCtl():
 
 
 def rightCtl():
-    print("right key is pressed")
+    # print("right key is pressed")
     with kb.pressed(
             keyboard.Key.right
     ): pass
@@ -68,7 +68,7 @@ def rightCtl():
 
 # 任务视图，win键+tab键
 def taskCtl():
-    print("cmd and tab are pressed")
+    # print("cmd and tab are pressed")
     with kb.pressed(
             keyboard.Key.cmd,
             keyboard.Key.tab

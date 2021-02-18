@@ -1,8 +1,8 @@
 {
   "init": {
     "click": "taskCtl",
-    "panLeft": "2",
-    "panRight":"3",
+    "panLeft": "",
+    "panRight":"",
     "enlarge": "",
     "narrow": "",
     "grab": "",
@@ -40,12 +40,12 @@
     "counterClockwiseRotation": ""
   },
     "system": {
-    "click": "taskCtl",
+    "click": "enterCtl",
     "panLeft": "leftCtl",
     "panRight":"rightCtl",
     "enlarge": "",
     "narrow": "",
-    "grab": "enterCtl",
+    "grab": "",
     "clockwiseRotation": "",
     "counterClockwiseRotation": ""
   },
