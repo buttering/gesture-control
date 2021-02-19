@@ -17,6 +17,9 @@ class modeDAO:
     grab = ""
     clockwiseRotation = ""
     counterClockwiseRotation = ""
+    custom1 = ""
+    custom2 = ""
+
 
     def __init__(self):
         jsonConfig.readMode(self, "init")

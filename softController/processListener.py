@@ -20,7 +20,7 @@ def active_window_process_name() -> str:
         pass
 
 def processMap(pname: str) -> str:
-    return processDict.get(pname, "init")
+    return processDict.get(pname, "init")  # 如果不是已适配软件，则默认为init
 
 if __name__ == '__main__':
     time.sleep(3)
