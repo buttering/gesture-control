@@ -7,19 +7,29 @@ import time
 class modeDAO:
     """存储当前软件模式(mode)中不同手势(gesture)所对应操作(operation)"""
 
+    # 模式名
     modeName = ""
 
+    # 点击手势
     click = ""
+    # 向左平移手势
     panLeft = ""
+    # 向右平移手势
     panRight = ""
+    # 放大手势
     enlarge = ""
+    # 缩小手势
     narrow = ""
+    # 抓取手势
     grab = ""
+    # 顺时针旋转手势
     clockwiseRotation = ""
+    # 逆时针旋转手势
     counterClockwiseRotation = ""
+    # 自定义手势1
     custom1 = ""
+    # 自定义手势2
     custom2 = ""
-
 
     def __init__(self):
         jsonConfig.readMode(self, "init")
