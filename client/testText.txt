@@ -1,0 +1,4 @@
+点击操作
+{"interface":"gesture","info":"click"}
+右移操作
+{"interface":"gesture","info":"panRight"}

@@ -1,10 +1,15 @@
 import socketserver
 import config.socketConfig as sc
+import json
+import server.gestureController
 
 ip_port = (sc.IP, sc.PORT)
 
 
 class MyServer(socketserver.BaseRequestHandler):
+
+    gestureController = server.gestureController.gestureController()
+
     # 重写handle方法，决定每一个连接过来的操作
     def handle(self):
         """
@@ -19,16 +24,34 @@ class MyServer(socketserver.BaseRequestHandler):
                 data = self.request.recv(1024)
                 if not data: break
                 print("收到客户端的消息是", data.decode("utf-8"))
+                success = self.redirect(data.decode("utf-8"))
                 # 发送消息
-                self.request.sendall(data.upper())
+                if success:
+                    self.request.sendall("success!".encode("utf-8"))
+                self.request.sendall("failure!".encode("utf-8"))
             except Exception as e:
                 print(e)
+                self.request.sendall("error!".encode("utf-8"))
                 break
 
     def setup(self) -> None:
         print("新建连接")
         print("conn is :", self.request)  # conn
         print("addr is :", self.client_address)  # addr
+
+    # 解析字符串，重定向请求到不同控制器
+    def redirect(self, jsonStr: str):
+        jsonDict = json.loads(jsonStr)
+        interface = jsonDict.get("interface")
+        info = jsonDict.get("info")
+
+        if interface == "gesture":
+            return self.gestureController.callOperation(info)
+        elif interface == "controlFocus":
+            pass
+        elif interface == "attach":
+            pass
+
 
 if __name__ == '__main__':
     # 定义服务端类型:支持ipv4的TCP协议的服务器
