@@ -14,24 +14,33 @@ class Window(QWidget):
     def keyPressEvent(self, keyEvent):
         transform = QTransform()
         if keyEvent.key() == Qt.Key_Up:
-            transform.translate(0,8)
-            self.repaint()
+            self.translate(0,8)
         if keyEvent.key() == Qt.Key_Down:
-            transform.translate(0,-8)
-            self.repaint()
+            self.translate(0,-8)
         if keyEvent.key() == Qt.Key_R:
-            transform.rotate(1)
-            self.repaint()
+            self.rotate(1)
         if keyEvent.key() == Qt.Key_T:
-            transform.rotate(-1)
-            self.repaint()
+            self.rotate(-1)
         if keyEvent.key() == Qt.Key_S:
-            transform.scale(1.01,1.01)
-            self.repaint()
+            self.scale(1.01)
         if keyEvent.key() == Qt.Key_D:
-            transform.scale(0.99,0.99)
-            self.repaint()
+            self.scale(0.99)
+
+    def translate(self,dx,dy):
+        transform = QTransform()
+        transform.translate(dx,dy)
         self.transform *= transform
+        self.repaint()
+    def rotate(self,angle):
+        transform = QTransform()
+        transform.rotate(angle)
+        self.transform *= transform
+        self.repaint()
+    def scale(self,ratio):
+        transform = QTransform()
+        transform.scale(ratio,ratio)
+        self.transform *= transform
+        self.repaint()
     def paintEvent(self, paintEvent):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.HighQualityAntialiasing,True)
