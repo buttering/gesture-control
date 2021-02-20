@@ -1,0 +1,62 @@
+{
+    "init": {
+        "click": "taskCtl",
+        "panLeft": "",
+        "panRight": "",
+        "enlarge": "",
+        "narrow": "",
+        "grab": "",
+        "clockwiseRotation": "",
+        "counterClockwiseRotation": "",
+        "custom1": "",
+        "custom2": ""
+    },
+    "picture": {
+        "click": "taskCtl",
+        "panLeft": "rightCtl",
+        "panRight": "leftCtl",
+        "enlarge": "pictureEnlargeCtl",
+        "narrow": "pictureNarrowCtl",
+        "grab": "pictureCopyCtl",
+        "clockwiseRotation": "pictureClockWiseRotationCtl",
+        "counterClockwiseRotation": "pictureClockWiseRotationCtl",
+        "custom1": "",
+        "custom2": ""
+    },
+    "ppt": {
+        "click": "taskCtl",
+        "panLeft": "rightCtl",
+        "panRight": "leftCtl",
+        "enlarge": "endCtl",
+        "narrow": "homeCtl",
+        "grab": "printScreenCtl",
+        "clockwiseRotation": "",
+        "counterClockwiseRotation": "",
+        "custom1": "",
+        "custom2": ""
+    },
+    "system": {
+        "click": "enterCtl",
+        "panLeft": "leftCtl",
+        "panRight": "rightCtl",
+        "enlarge": "",
+        "narrow": "",
+        "grab": "",
+        "clockwiseRotation": "",
+        "counterClockwiseRotation": "",
+        "custom1": "",
+        "custom2": ""
+    },
+    "tencent meeting": {
+        "click": "taskCtl",
+        "panLeft": "",
+        "panRight": "",
+        "enlarge": "volumeUpCtl",
+        "narrow": "volumeDownCtl",
+        "grab": "printScreenCtl",
+        "clockwiseRotation": "",
+        "counterClockwiseRotation": "",
+        "custom1": "",
+        "custom2": ""
+    }
+}
