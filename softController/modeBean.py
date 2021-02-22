@@ -4,7 +4,7 @@ from softController import processListener
 import time
 
 
-class modeDAO:
+class modeBean:
     """存储当前软件模式(mode)中不同手势(gesture)所对应操作(operation)"""
 
     # 模式名
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     # mode.setOperation(modeType)
     # time.sleep(2)
     # mode.callOperation(gesture)
-    mode = modeDAO()
+    mode = modeBean()
     print(mode.modeName, mode.click)
     mode.callOperation("click")
     print(mode.modeName, mode.click)
