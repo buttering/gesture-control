@@ -1,9 +1,9 @@
 import sqlite3
 import config.databaseConfig as dc
 
+
 # 如果数据库文件不存在，会自动被创建
 class databaseUtil:
-
     # 下面两个增加语句必须同时调用，以保证完整性
     __insert_device_cmd = '''
         INSERT INTO device 
@@ -21,6 +21,13 @@ class databaseUtil:
         WHERE deviceId = ?;
     '''
 
+    # 字段自动加1
+    __update_count_increment_cmd = '''
+        UPDATE count SET
+        {} = {} + 1
+        WHERE deviceId = ?;
+    '''
+
     __select_device_cmd = '''
         SELECT deviceId, password FROM device WHERE deviceId = ?;
     '''
@@ -34,7 +41,6 @@ class databaseUtil:
     __select_count_cmd = '''
         SELECT {} FROM count WHERE deviceId = ?;
     '''
-
 
     def __init__(self):
         conn = sqlite3.connect(dc.databaseName)
@@ -63,7 +69,8 @@ class databaseUtil:
         conn.commit()
         conn.close()
 
-# TODO:使用装饰器简化代码
+
+
     def insert_device(self, device_id: str, password: str):
         conn = sqlite3.connect(dc.databaseName)
         cur = conn.cursor()
@@ -72,7 +79,7 @@ class databaseUtil:
         conn.commit()
         conn.close()
 
-    def select_device(self, device_id):
+    def select_device(self, device_id, cur):
         conn = sqlite3.connect(dc.databaseName)
         cur = conn.cursor()
         cur.execute(self.__select_device_cmd, (device_id,))
@@ -84,8 +91,9 @@ class databaseUtil:
     def update_count(self, device_id, gesture: str):
         conn = sqlite3.connect(dc.databaseName)
         cur = conn.cursor()
-        gesture_count = self.select_count(device_id, gesture)[0]
-        cur.execute(self.__update_count_cmd.format(gesture), (gesture_count + 1, device_id))
+        # gesture_count = self.select_count(device_id, gesture)[0]
+        # cur.execute(self.__update_count_cmd.format(gesture), (gesture_count + 1, device_id))
+        cur.execute(self.__update_count_increment_cmd.format(gesture, gesture), (device_id, ))
         conn.commit()
         conn.close()
 
@@ -101,7 +109,7 @@ class databaseUtil:
         conn = sqlite3.connect(dc.databaseName)
         cur = conn.cursor()
         cur.execute(self.__select_count_cmd.format(gesture), (deviceId,))
-        # BUG:返回的不是值的数字，而是键的字符串
+        # BUG:返回的不是值的数字，而是键的字符串(已解决)
         result = cur.fetchone()
         conn.close()
         return result

@@ -24,7 +24,10 @@ Gesture control system for software innovation competition
 ```json
 {
   "interface": "gesture",
-  "info": <gestureName>
+  "info": {
+    "gesturename": <gestureName>,
+    "deviceid": <deviceId>
+    }
 }
 ```
 - gestureName对应值：
@@ -47,7 +50,9 @@ Gesture control system for software innovation competition
 ```json
 {
   "interface": "controlFocus",
-  "info": <deviceId>
+  "info": {
+    "deviceid": <deviceId>
+  }
 }
 ```
 deviceId为设备的唯一标识符
@@ -58,7 +63,9 @@ deviceId为设备的唯一标识符
 ```json
 {
   "interface": "attach",
-  "info": <deviceId>
+  "info": {
+    "deviceid": <deviceId>
+  }
 }
 ```
 TODO:身份鉴权

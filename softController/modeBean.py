@@ -64,6 +64,7 @@ class modeBean:
         elif operation == "pictureClockWiseRotationCtl":
             keyboardController.pictureClockWiseRotationCtl()
         elif operation == "enterCtl":
+
             keyboardController.enterCtl()
             time.sleep(0.01)  # 等待焦点切换完成
             pname = processListener.active_window_process_name()

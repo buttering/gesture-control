@@ -1,4 +1,4 @@
 点击操作
-{"interface":"gesture","info":"click"}
+{"interface":"gesture","info":{"gesturename":"click", "deviceid": "ABc"}}
 右移操作
-{"interface":"gesture","info":"panRight"}
+{"interface":"gesture","info":{"gesturename":"panright", "deviceid": "ABc"}}
