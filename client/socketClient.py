@@ -19,11 +19,11 @@ def sendMsg(msg=None):
         tcp_client.connect(ip_port)
 
         while True:
-            # tcp_client.sendall('{"interface":"gesture","info":"click"}'.encode("utf-8"))
-            # time.sleep(0.5)
-            # tcp_client.sendall('{"interface":"gesture","info":"panRight"}'.encode("utf-8"))
-            # time.sleep(0.5)
-            # tcp_client.sendall('{"interface":"gesture","info":"click"}'.encode("utf-8"))
+            tcp_client.sendall('{"interface":"gesture","info":{"gesturename":"click", "deviceid": "ABc"}}'.encode("utf-8"))
+            time.sleep(1)
+            tcp_client.sendall('{"interface":"gesture","info":{"gesturename":"panRight", "deviceid": "ABc"}}'.encode("utf-8"))
+            time.sleep(0.5)
+            tcp_client.sendall('{"interface":"gesture","info":{"gesturename":"click", "deviceid": "ABc"}}'.encode("utf-8"))
             msg = input(">>>").strip()
 
             if not msg: continue

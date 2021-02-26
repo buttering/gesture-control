@@ -2,8 +2,9 @@
 Gesture control system for software innovation competition
 
 # 手势对应操作
+**以下手势需要获取焦点后可执行**
 
-手势|ppt|图片|腾讯会议|系统任务视图
+手势|ppt|图片|会议软件|系统任务视图
 -|-|-|-|-
 点击|进入任务视图|进入任务视图|进入任务视图|进入选中的进程，切换为对应软件的手势模式
 向左平移|切换下一个动画|切换上一张|-|在任务视图中切换到上一进程
@@ -16,6 +17,9 @@ Gesture control system for software innovation competition
 待添加手势1|-|-|-|-
 待添加手势2|-|-|-|-
 
+**以下为全局手势，任何人无需获取焦点即可执行**
+- 点赞
+- 点踩
 # 网络接口
 - 格式：json字符串格式，使用tcp/ip协议传输
 ### 操作接口
@@ -30,22 +34,26 @@ Gesture control system for software innovation competition
     }
 }
 ```
+
 - gestureName对应值：
+
 手势|值
 -|-
 点击|click
-向左平移|panleft
-向右平移|panright
+向左平移|panLeft
+向右平移|panRight
 缩放（放大）|enlarge
 缩放（缩小）|narrow
 抓取|grasp
 旋转（顺时针）|cwr
 旋转（逆时针）|ccwr
+点赞 | like
+点踩 | unlike
 待添加手势1|cus1
 待添加手势2|cus2
 
 ### 获取焦点接口
-- 描述：获取对系统的控制权，忽略其他人的操作请求
+- 描述：当检测到特定手势（pulling hand in），获取对系统的控制权，忽略其他人的操作请求
 - 字段
 ```json
 {

@@ -6,5 +6,11 @@ class gestureController:
 
     def callOperation(self, gesture: str) -> bool:
         # TODO:身份鉴权，只执行获取了焦点的操控者指令
-        self.__modeBean.callOperation(gesture)
+        if gesture == "like":
+            # TODO：点赞效果
+            pass
+        elif gesture == "unlike":
+            pass
+        else:
+            self.__modeBean.callOperation(gesture)
         return True

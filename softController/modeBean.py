@@ -41,7 +41,7 @@ class modeBean:
     # 根据当前模式调用对应手势的操作
     def callOperation(self, gesture: str):
         operation = getattr(self, gesture, None)
-        print("operation:", operation, "is called")
+        print("mode:",self.modeName, ",operation:", operation, "is called")
         if operation == "leftCtl":
             keyboardController.leftCtl()
         elif operation == "rightCtl":
@@ -64,7 +64,6 @@ class modeBean:
         elif operation == "pictureClockWiseRotationCtl":
             keyboardController.pictureClockWiseRotationCtl()
         elif operation == "enterCtl":
-
             keyboardController.enterCtl()
             time.sleep(0.01)  # 等待焦点切换完成
             pname = processListener.active_window_process_name()

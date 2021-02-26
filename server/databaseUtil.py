@@ -61,6 +61,8 @@ class databaseUtil:
                 grasp INT DEFAULT 0,
                 cwr INT DEFAULT 0,
                 ccwr INT DEFAULT 0,
+                like     INT default 0,
+                unlike   INT default 0,
                 cus1 INT DEFAULT 0,
                 cus2 INT DEFAULT 0);
         '''
