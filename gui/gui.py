@@ -4,6 +4,8 @@ from PyQt5.QtCore import *
 import PyQt5
 import sys
 
+#这是显示图片的控件
+#调用translate，rotate, scale来移动，旋转，缩放图片
 class PictureWidget(QWidget):
     def __init__(self):
         QWidget.__init__(self)
