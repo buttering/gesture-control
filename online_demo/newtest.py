@@ -7,6 +7,7 @@ import torchvision
 import torch.onnx
 from PIL import Image, ImageOps
 from online_demo.mobilenet_v2_tsm import MobileNetV2
+from client import socketClient
 
 SOFTMAX_THRES = 0
 HISTORY_LOGIT = True
@@ -230,7 +231,24 @@ def get_executor(use_gpu=True):
 
     return torch_module, torch_inputs
 
+
 def main():
+
+    # 与服务器进行连接
+    attempt = 5  # 网络连接尝试次数
+    inteval = 1  # 重连间隔
+    print("连接服务器中")
+    for i in range(attempt):
+        try:
+            client = socketClient.socketClient()
+        except Exception as e:
+            print(f"服务器连接失败……{inteval}秒后重试……剩余{attempt - i}次")
+            time.sleep(inteval)
+        if i == attempt - 1:
+            print("服务器连接失败，请检查后重新启动")
+            return
+    print("连接成功！")
+
     print("Open camera...")
     cap = cv2.VideoCapture(0)
 
@@ -257,7 +275,6 @@ def main():
     history_timing = []
 
     i_frame = -1
-
     print("Ready!")
     with torch.no_grad():
         while True:
@@ -342,4 +359,5 @@ def main():
         cv2.destroyAllWindows()
 
 
-main()
+if __name__ == '__main__':
+    main()
