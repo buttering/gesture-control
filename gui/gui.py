@@ -4,27 +4,14 @@ from PyQt5.QtCore import *
 import PyQt5
 import sys
 
-class Window(QWidget):
+class PictureWidget(QWidget):
     def __init__(self):
         QWidget.__init__(self)
+
         self.image = QImage("a.png")
         transform = QTransform()
         self.transform = transform
-    
-    def keyPressEvent(self, keyEvent):
-        transform = QTransform()
-        if keyEvent.key() == Qt.Key_Up:
-            self.translate(0,8)
-        if keyEvent.key() == Qt.Key_Down:
-            self.translate(0,-8)
-        if keyEvent.key() == Qt.Key_R:
-            self.rotate(1)
-        if keyEvent.key() == Qt.Key_T:
-            self.rotate(-1)
-        if keyEvent.key() == Qt.Key_S:
-            self.scale(1.01)
-        if keyEvent.key() == Qt.Key_D:
-            self.scale(0.99)
+        print("hhh")
 
     def translate(self,dx,dy):
         transform = QTransform()
@@ -52,6 +39,30 @@ class Window(QWidget):
         painter.setTransform(transform)
 
         painter.drawImage(-image.width()/2,-image.height()/2,image)
+
+
+class Window(QMainWindow):
+    def __init__(self):
+        QMainWindow.__init__(self)
+        self.setWindowTitle("Picture")
+        self.setMinimumSize(500,400)
+
+        menuBar = QMenuBar()
+        fileMenu = QMenu("文件",menuBar)
+        openAction = QAction("打开",fileMenu)
+        openAction.setStatusTip("打开一个图片")
+        fileMenu.addAction(openAction)
+        fileMenu.triggered[QAction].connect(self.fileTrigger)
+        menuBar.addMenu(fileMenu) 
+        self.setMenuBar(menuBar)
+
+        self.pictureWidget = PictureWidget()
+        self.setCentralWidget(self.pictureWidget)
+
+    def fileTrigger(self,q):
+        if q.text() == "打开":
+            imageFilePath,filt = QFileDialog.getOpenFileName(self,"选择图片",".","images(*.png *jpeg *bmp)")
+            self.pictureWidget.image = QImage(imageFilePath)
 
 app = QApplication(sys.argv)
 win = Window()
