@@ -40,6 +40,7 @@ class modeBean:
 
     # 根据当前模式调用对应手势的操作
     def callOperation(self, gesture: str):
+        #  这里是直接通过成员变量名获取值，所以传进参数必须严格一致
         operation = getattr(self, gesture, None)
         print("mode:",self.modeName, ",operation:", operation, "is called")
         if operation == "leftCtl":

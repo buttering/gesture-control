@@ -10,7 +10,6 @@ class MyServer(socketserver.BaseRequestHandler):
 
     gestureController = server.gestureController.gestureController()
 
-
     # 重写handle方法，决定每一个连接过来的操作
     def handle(self):
         """
