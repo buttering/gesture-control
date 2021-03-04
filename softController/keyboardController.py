@@ -37,25 +37,25 @@ def pagedownCtl():
 
 def pageupCtl():
     with kb.pressed(
-            keyboard.Key.page_down
+            keyboard.Key.page_up
     ): pass
 
 
 def upCtl():
     with kb.pressed(
-            keyboard.Key.page_down
+            keyboard.Key.up
     ): pass
 
 
 def downCtl():
     with kb.pressed(
-            keyboard.Key.page_down
+            keyboard.Key.down
     ): pass
 
 
 def leftCtl():
     with kb.pressed(
-            keyboard.Key.page_down
+            keyboard.Key.left
     ): pass
 
 
