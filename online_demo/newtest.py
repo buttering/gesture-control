@@ -315,11 +315,12 @@ def main():
                 idx, history = process_output(idx_, history)
 
                 # TODO
-                if idx == 16:
-                    client.gestureFilter('click')
+                if idx != history[-2]:
+                    if idx == 16:
+                        client.gestureFilter('click')
 
                 t2 = time.time()
-                print(f"{index} {catigories[idx]}")
+                print(f"{index}:{catigories[idx]},idx:{idx},history:{history}")
 
                 current_time = t2 - t1
 
