@@ -23,8 +23,8 @@ class socketClient:
             {
                 "interface":"gesture",
                 "info":{
-                    "gesturename":''' + gestureName + ''',
-                    "deviceid": ''' + deviceid + '''
+                    "gesturename":"''' + gestureName + '''",
+                    "deviceid":"''' + deviceid + '''"
                 }
             }
         '''
@@ -36,7 +36,7 @@ class socketClient:
             {
                 "interface":"controlFocus",
                 "info":{
-                    "deviceid": ''' + deviceid + '''
+                    "deviceid":"''' + deviceid + '''"
                 }
             }
         '''
@@ -48,7 +48,8 @@ class socketClient:
             {
                 "interface":"attach",
                 "info":{
-                    "deviceid": ''' + deviceid + '''
+                    "deviceid":"''' + deviceid + '''"
+                    
                 }
             }
         '''
@@ -91,6 +92,7 @@ class socketClient:
 
 if __name__ == '__main__':
     socketClient = socketClient()
+    # socketClient.gestureFilter("click")
     while True:
         msg = input(">>>").strip()
         if not msg: continue

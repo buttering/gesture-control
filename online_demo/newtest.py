@@ -241,6 +241,8 @@ def main():
     for i in range(attempt):
         try:
             client = socketClient.socketClient()
+            if client:
+                break
         except Exception as e:
             print(f"服务器连接失败……{inteval}秒后重试……剩余{attempt - i}次")
             time.sleep(inteval)
@@ -312,8 +314,13 @@ def main():
 
                 idx, history = process_output(idx_, history)
 
+                # TODO
+                if idx != history[-2]:
+                    if idx == 16:
+                        client.gestureFilter('click')
+
                 t2 = time.time()
-                print(f"{index} {catigories[idx]}")
+                print(f"{index}:{catigories[idx]},idx:{idx},history:{history}")
 
                 current_time = t2 - t1
 
