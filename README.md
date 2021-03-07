@@ -77,3 +77,10 @@ deviceId为设备的唯一标识符
 }
 ```
 TODO:身份鉴权
+
+# 图形界面与核心功能的接口
+## 类名
+- Interface
+## 类方法
+- createMeeting()
+- joinMeeting( ip )
