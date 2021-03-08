@@ -1,5 +1,7 @@
 from config import socketConfig
 from server import socketServer
+from online_demo import newtest
+
 
 class Interface:
 
@@ -29,9 +31,12 @@ class Interface:
         server.runServer(self.__socketServerIp, self.__socketServerPort)
         return server
 
-    #加入会议
-    def joinMeeting(self,ip: str):
+    # 加入会议
+    # 与讲解人员主机进行连接，并返回客户端实例。但并未启动手势识别功能
+    def joinMeeting(self):
         #ip是主机IP的字符串
-        pass
+        client = newtest.gestureRecognize()
+        client.startUpClient(self.__socketServerIp, self.__socketServerPort)
+        return client
 
 
