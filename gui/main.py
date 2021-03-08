@@ -1,5 +1,16 @@
+
 from PyQt5.QtWidgets import *
 import sys
+
+# 在引入父目录的模块之前加上如下代码：
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir)))
+#os.pardir:Linux下相当于"../"
+#————————————————
+#版权声明：本文为CSDN博主「孤独的侠客」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+#原文链接：https://blog.csdn.net/chenyunqiang/article/details/104648942
+
 from interface import Interface
 
 class JoinWidget(QWidget):
@@ -15,17 +26,17 @@ class JoinWidget(QWidget):
         self.inter = inter
     
     def commit(self):
-        ip = self.lineEdit.text()
-        self.inter.joinMeeting(ip)
+        self.inter.joinMeeting(self.lineEdit.text())
 
 class CreateWidget(QWidget):
     def __init__(self,inter):
         QWidget.__init__(self)
-        ipLabel = QLabel("ip:"+inter.getIp())
+        meetingId = inter.createMeeting()
+        ipLabel = QLabel("ip:"+meetingId)
         layout = QHBoxLayout()
         layout.addWidget(ipLabel)
         self.setLayout(layout)
-        inter.createMeeting()
+        
         
 
 #这是初始界面
