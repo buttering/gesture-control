@@ -6,6 +6,26 @@ from server import databaseUtil
 ip_port = (sc.IP, sc.PORT)
 
 
+class socketServer:
+
+    # 保存当前服务器实例
+    server = None
+
+    # 启动socket服务器
+    def runServer(self, ip, port):
+        try:
+            # 定义服务端类型:支持ipv4的TCP协议的服务器
+            self.server = socketserver.ThreadingTCPServer((ip, port), MyServer)
+            # 持续循环运行
+            self.server.serve_forever()
+        except Exception:
+            print(Exception)
+
+    # 退出服务器
+    def terminateServer(self):
+        self.server.server_close()
+
+
 class MyServer(socketserver.BaseRequestHandler):
 
     gestureController = server.gestureController.gestureController()
@@ -62,7 +82,5 @@ class MyServer(socketserver.BaseRequestHandler):
 
 
 if __name__ == '__main__':
-    # 定义服务端类型:支持ipv4的TCP协议的服务器
-    s = socketserver.ThreadingTCPServer(ip_port, MyServer)
-    # 持续循环运行
-    s.serve_forever()
+    socketServer = socketServer()
+    socketServer.runServer("127.0.0.1", 9000)
