@@ -13,6 +13,7 @@ class socketServer:
 
     # 启动socket服务器
     def runServer(self, ip, port):
+        print("启动socket服务器...")
         try:
             # 定义服务端类型:支持ipv4的TCP协议的服务器
             self.server = socketserver.ThreadingTCPServer((ip, port), MyServer)

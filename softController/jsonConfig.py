@@ -1,8 +1,8 @@
 import json
 
 #VSCode路径需要设置为这个
-jsonPath = r"softController/mode.json"
-#jsonPath = r"../softController/mode.json"
+# jsonPath = r"softController/mode.json"
+jsonPath = r"../softController/mode.json"
 
 
 # 根据不同软件模式设置手势配置操作
