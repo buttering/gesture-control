@@ -8,6 +8,7 @@ import torch.onnx
 from PIL import Image, ImageOps
 from online_demo.mobilenet_v2_tsm import MobileNetV2
 from client import socketClient
+from config import socketConfig
 
 SOFTMAX_THRES = 0
 HISTORY_LOGIT = True
@@ -231,139 +232,149 @@ def get_executor(use_gpu=True):
 
     return torch_module, torch_inputs
 
+class gestureRecognize:
 
-def main():
+    # 保存客户端实例
+    __client = None
 
-    # 与服务器进行连接
-    attempt = 5  # 网络连接尝试次数
-    inteval = 1  # 重连间隔
-    print("连接服务器中")
-    for i in range(attempt):
-        try:
-            client = socketClient.socketClient()
-            if client:
+    # 启动socket客户端，与socket服务器进行连接
+    def startUpClient(self, ip: str, port: int) -> bool:
+        # 与服务器进行连接
+        attempt = 5  # 网络连接尝试次数
+        inteval = 1  # 重连间隔
+        print("连接服务器中")
+        self.__client = socketClient.socketClient()
+        for i in range(attempt):
+            if self.__client.startUp(ip, port):
                 break
-        except Exception as e:
-            print(f"服务器连接失败……{inteval}秒后重试……剩余{attempt - i}次")
-            time.sleep(inteval)
-        if i == attempt - 1:
-            print("服务器连接失败，请检查后重新启动")
-            return
-    print("连接成功！")
-
-    print("Open camera...")
-    cap = cv2.VideoCapture(0)
-
-    # set a lower resolution for speed up
-    # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
-    # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-
-    # env variables
-    full_screen = False
-    cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_NORMAL)
-    cv2.resizeWindow(WINDOW_NAME, 640, 480)
-    cv2.moveWindow(WINDOW_NAME, 0, 0)
-    cv2.setWindowTitle(WINDOW_NAME, WINDOW_NAME)
-
-    t = None
-    index = 0
-    transform = get_transform()
-    model, buffer = get_executor()
-    model.eval()
-
-    idx = 0
-    history = [2]
-    history_logit = []
-    history_timing = []
-
-    i_frame = -1
-    print("Ready!")
-    with torch.no_grad():
-        while True:
-            i_frame += 1
-            _, img = cap.read()  # (480, 640, 3) 0 ~ 255
-            if i_frame % 2 == 0:  # skip every other frame to obtain a suitable frame rate
-                t1 = time.time()
-
-                img_tran = transform([Image.fromarray(img).convert('RGB')])
-                input_var = img_tran.view(1, 3, img_tran.size(1), img_tran.size(2))
-                outputs = model(input_var, *buffer)
-                feat, buffer = outputs[0], outputs[1:] # TODO!
-                feat = feat.detach()
-                print(len(buffer), input_var.shape)
-
-                if SOFTMAX_THRES > 0:
-                    feat_np = feat.asnumpy().reshape(-1)
-                    feat_np -= feat_np.max()
-                    softmax = np.exp(feat_np) / np.sum(np.exp(feat_np))
-
-                    print(max(softmax))
-                    if max(softmax) > SOFTMAX_THRES:
-                        idx_ = np.argmax(feat.asnumpy(), axis=1)[0]
-                    else:
-                        idx_ = idx
-                else:
-                    idx_ = np.argmax(feat.cpu().numpy(), axis=1)[0]
-                    print(idx_)
-
-                if HISTORY_LOGIT:
-                    history_logit.append(feat.cpu().numpy())
-                    history_logit = history_logit[-12:]
-                    avg_logit = sum(history_logit)
-                    idx_ = np.argmax(avg_logit, axis=1)[0]
-
-                idx, history = process_output(idx_, history)
-
-                # TODO
-                if idx == 16:
-                    client.gestureFilter('click')
-
-                t2 = time.time()
-                print(f"{index} {catigories[idx]}")
-
-                current_time = t2 - t1
-
-            img = cv2.resize(img, (640, 480))
-            img = img[:, ::-1]
-            height, width, _ = img.shape
-            label = np.zeros([height // 10, width, 3]).astype('uint8') + 255
-
-            cv2.putText(label, 'Prediction: ' + catigories[idx],
-                        (0, int(height / 16)),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.7, (0, 0, 0), 2)
-            cv2.putText(label, '{:.1f} Vid/s'.format(1 / current_time),
-                        (width - 170, int(height / 16)),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.7, (0, 0, 0), 2)
-
-            img = np.concatenate((img, label), axis=0)
-            cv2.imshow(WINDOW_NAME, img)
-
-            key = cv2.waitKey(1)
-            if key & 0xFF == ord('q') or key == 27:  # exit
-                break
-            elif key == ord('F') or key == ord('f'):  # full screen
-                print('Changing full screen option!')
-                full_screen = not full_screen
-                if full_screen:
-                    print('Setting FS!!!')
-                    cv2.setWindowProperty(WINDOW_NAME, cv2.WND_PROP_FULLSCREEN,
-                                          cv2.WINDOW_FULLSCREEN)
-                else:
-                    cv2.setWindowProperty(WINDOW_NAME, cv2.WND_PROP_FULLSCREEN,
-                                          cv2.WINDOW_NORMAL)
-
-            if t is None:
-                t = time.time()
             else:
-                nt = time.time()
-                index += 1
-                t = nt
+                print(f"服务器连接失败……{inteval}秒后重试……剩余{attempt - i}次")
+                time.sleep(inteval)
+            if i == attempt - 1:
+                print("服务器连接失败，请检查后重新启动")
+                return False
+        print("连接成功！")
+        return True
 
-        cap.release()
-        cv2.destroyAllWindows()
+    # 启动相机，开始手势识别
+    def startRecognize(self):
+
+        print("Open camera...")
+        cap = cv2.VideoCapture(0)
+
+        # set a lower resolution for speed up
+        # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
+        # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
+
+        # env variables
+        full_screen = False
+        cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_NORMAL)
+        cv2.resizeWindow(WINDOW_NAME, 640, 480)
+        cv2.moveWindow(WINDOW_NAME, 0, 0)
+        cv2.setWindowTitle(WINDOW_NAME, WINDOW_NAME)
+
+        t = None
+        index = 0
+        transform = get_transform()
+        model, buffer = get_executor()
+        model.eval()
+
+        idx = 0
+        history = [2]
+        history_logit = []
+        history_timing = []
+
+        i_frame = -1
+        print("Ready!")
+        with torch.no_grad():
+            while True:
+                i_frame += 1
+                _, img = cap.read()  # (480, 640, 3) 0 ~ 255
+                if i_frame % 2 == 0:  # skip every other frame to obtain a suitable frame rate
+                    t1 = time.time()
+
+                    img_tran = transform([Image.fromarray(img).convert('RGB')])
+                    input_var = img_tran.view(1, 3, img_tran.size(1), img_tran.size(2))
+                    outputs = model(input_var, *buffer)
+                    feat, buffer = outputs[0], outputs[1:] # TODO!
+                    feat = feat.detach()
+                    print(len(buffer), input_var.shape)
+
+                    if SOFTMAX_THRES > 0:
+                        feat_np = feat.asnumpy().reshape(-1)
+                        feat_np -= feat_np.max()
+                        softmax = np.exp(feat_np) / np.sum(np.exp(feat_np))
+
+                        print(max(softmax))
+                        if max(softmax) > SOFTMAX_THRES:
+                            idx_ = np.argmax(feat.asnumpy(), axis=1)[0]
+                        else:
+                            idx_ = idx
+                    else:
+                        idx_ = np.argmax(feat.cpu().numpy(), axis=1)[0]
+                        print(idx_)
+
+                    if HISTORY_LOGIT:
+                        history_logit.append(feat.cpu().numpy())
+                        history_logit = history_logit[-12:]
+                        avg_logit = sum(history_logit)
+                        idx_ = np.argmax(avg_logit, axis=1)[0]
+
+                    idx, history = process_output(idx_, history)
+
+                    # TODO
+                    if idx != history[-2]:
+                        if idx == 16:
+                            self.__client.gestureFilter('click')
+
+                    t2 = time.time()
+                    print(f"{index}:{catigories[idx]},idx:{idx},history:{history}")
+
+                    current_time = t2 - t1
+
+                img = cv2.resize(img, (640, 480))
+                img = img[:, ::-1]
+                height, width, _ = img.shape
+                label = np.zeros([height // 10, width, 3]).astype('uint8') + 255
+
+                cv2.putText(label, 'Prediction: ' + catigories[idx],
+                            (0, int(height / 16)),
+                            cv2.FONT_HERSHEY_SIMPLEX,
+                            0.7, (0, 0, 0), 2)
+                cv2.putText(label, '{:.1f} Vid/s'.format(1 / current_time),
+                            (width - 170, int(height / 16)),
+                            cv2.FONT_HERSHEY_SIMPLEX,
+                            0.7, (0, 0, 0), 2)
+
+                img = np.concatenate((img, label), axis=0)
+                cv2.imshow(WINDOW_NAME, img)
+
+                key = cv2.waitKey(1)
+                if key & 0xFF == ord('q') or key == 27:  # exit
+                    break
+                elif key == ord('F') or key == ord('f'):  # full screen
+                    print('Changing full screen option!')
+                    full_screen = not full_screen
+                    if full_screen:
+                        print('Setting FS!!!')
+                        cv2.setWindowProperty(WINDOW_NAME, cv2.WND_PROP_FULLSCREEN,
+                                              cv2.WINDOW_FULLSCREEN)
+                    else:
+                        cv2.setWindowProperty(WINDOW_NAME, cv2.WND_PROP_FULLSCREEN,
+                                              cv2.WINDOW_NORMAL)
+
+                if t is None:
+                    t = time.time()
+                else:
+                    nt = time.time()
+                    index += 1
+                    t = nt
+
+            cap.release()
+            cv2.destroyAllWindows()
 
 
 if __name__ == '__main__':
-    main()
+    gestureRecognize = gestureRecognize()
+    if gestureRecognize.startUpClient(socketConfig.IP, socketConfig.PORT):
+        gestureRecognize.startRecognize()
