@@ -2,7 +2,10 @@ import cv2
 import mediapipe as mp
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
-
+'''
+  pip install mediapipe
+  document:https://google.github.io/mediapipe/solutions/hands
+'''
 # For static images:
 # 用于直接处理图片获取输出
 # with mp_hands.Hands(
@@ -59,7 +62,7 @@ with mp_hands.Hands(
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     if results.multi_hand_landmarks:
       x = results.multi_hand_landmarks
-      print(len(x))
+      print(x)
       for hand_landmarks in results.multi_hand_landmarks:
         mp_drawing.draw_landmarks(
             image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
