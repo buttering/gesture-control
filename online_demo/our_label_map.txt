@@ -1,0 +1,13 @@
+"Doing other things"
+Click
+"No gesture"
+"Swiping Right"
+"Swiping Left"
+"Swiping Up"
+Grab
+Zooming In
+Zooming Out
+Turning Clockwise
+Turning Counterclockwise
+"Thumb Up"
+"Thumb Down"
