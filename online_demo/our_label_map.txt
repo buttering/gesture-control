@@ -3,11 +3,11 @@ Click
 "No gesture"
 "Swiping Right"
 "Swiping Left"
-"Swiping Up"
+"Swiping Up"                ljy
 Grab
-Zooming In
-Zooming Out
-Turning Clockwise
-Turning Counterclockwise
+Zooming In      wjw
+Zooming Out     wjw
+Turning Clockwise           ljy
+Turning Counterclockwise    ljy
 "Thumb Up"
 "Thumb Down"

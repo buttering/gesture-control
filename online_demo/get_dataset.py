@@ -13,7 +13,10 @@ input_points = [0, 2, 4, 5, 8, 9, 12, 13, 16, 17, 20]
 # (16,33)
 hand1_frames = []
 hand2_frames = []
+# TODO： 数据存储路径，两只手的数据分别存在root_dir/label/hand1/ 与root_dir/label/hand2目录下,当录制单手数据集时，hand2目录下的数据为全0。所以删除无效数据时记得删除两个文件。
 root_dir = 'C:/Users/Administrator/Desktop/dataset'
+# TODO: 数据类别,3表示第3类手势，每一类手势具体指代详见当前目录下our_label_map.txt
+label = '3'
 n = 0
 # For webcam input:
 # 实时检测手势
@@ -73,8 +76,9 @@ with mp_hands.Hands(
                 hand1_frames.append(hand1)
                 hand2_frames.append(hand2)
                 if n == 48:
-                    save_dir_1 = os.path.join(root_dir,'3','hand1')
-                    save_dir_2 = os.path.join(root_dir,'3','hand2')
+                    # TODO
+                    save_dir_1 = os.path.join(root_dir,label,'hand1')
+                    save_dir_2 = os.path.join(root_dir,label,'hand2')
                     if not os.path.exists(save_dir_1):
                         os.mkdir(save_dir_1)
                         os.mkdir(save_dir_2)
