@@ -14,16 +14,16 @@ input_points = [0, 2, 4, 5, 8, 9, 12, 13, 16, 17, 20]
 hand1_frames = []
 hand2_frames = []
 # TODO： 数据存储路径，两只手的数据分别存在root_dir/label/hand1/ 与root_dir/label/hand2目录下,当录制单手数据集时，hand2目录下的数据为全0。所以删除无效数据时记得删除两个文件。
-root_dir = 'C:/Users/Administrator/Desktop/dataset'
-# TODO: 数据类别,3表示第3类手势，每一类手势具体指代详见当前目录下our_label_map.txt
-label = '3'
+root_dir = 'C:/Users/Administrator/Desktop/testset'
+# TODO: 数据类别,标签从0开始计数，3表示第3类手势（"Swiping Right"），每一类手势具体指代详见当前目录下our_label_map.txt。10、11、12应该是合理的数据
+label = '0'
 n = 0
 # For webcam input:
 # 实时检测手势
 cap = cv2.VideoCapture(0)
 with mp_hands.Hands(
-        min_detection_confidence=0.8,
-        min_tracking_confidence=0.2) as hands:
+        min_detection_confidence=0.80,
+        min_tracking_confidence=0.25) as hands:
     while cap.isOpened():
         success, image = cap.read()
         if not success:
