@@ -5,6 +5,9 @@ import mediapipe as mp
 import numpy as np
 import time
 
+'''
+    用于手势关键点数据的录制
+'''
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 input_points = [0, 2, 4, 5, 8, 9, 12, 13, 16, 17, 20]
@@ -100,3 +103,6 @@ with mp_hands.Hands(
         if cv2.waitKey(5) & 0xFF == 27:
             break
 cap.release()
+
+def get_0():
+    pass
