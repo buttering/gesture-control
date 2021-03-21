@@ -3,7 +3,12 @@ import time
 import numpy as np
 import cv2
 
-path = 'D:/CSU/data3/customize_ges/ljy/逆时针/'
+'''
+    用于TSM网络所需视频的手势数据的录制
+'''
+
+
+path = 'D:/CSU/data3/customize_ges/所有数据/no_gesture/'
 cap = cv2.VideoCapture(0)
 
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
