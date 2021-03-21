@@ -23,7 +23,7 @@ class JoinWidget(QWidget):
         self.inter = inter
     
     def commit(self):
-        self.inter.joinMeeting(self.lineEdit.text())
+        client = self.inter.joinMeeting(self.lineEdit.text())
 class CreateMeetingThread(QThread):
     def __init__(self,inter):
         QThread.__init__(self)
@@ -36,7 +36,7 @@ class CreateWidget(QWidget):
         self.inter = inter
         self.thread = CreateMeetingThread(inter)
         self.thread.start()
-        ipLabel = QLabel("ip:")
+        ipLabel = QLabel("ip:" + inter.getIp())
         layout = QHBoxLayout()
         layout.addWidget(ipLabel)
         self.setLayout(layout)
@@ -59,6 +59,7 @@ class InitWidget(QWidget):
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
+        self.resize(600,500)
         self.inter = Interface()
         initWidget = InitWidget(self.toCreateWidget, self.toJoinWidget)
         self.setCentralWidget(initWidget)

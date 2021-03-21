@@ -49,6 +49,7 @@ class Interface:
         # TODO：根据会议号，向服务器获取讲解人主机ip地址
         ip = meetingId
         client.startUpClient(ip, self.__socketServerPort)
+        client.startRecognize()
         return client
 
 
