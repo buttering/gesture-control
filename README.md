@@ -79,8 +79,26 @@ deviceId为设备的唯一标识符
 TODO:身份鉴权
 
 # 图形界面与核心功能的接口
-## 类名
-- Interface
-## 类方法
-- createMeeting()
-- joinMeeting( ip )
+## 有三个类：recogilizer、controller和manager
+## recogilizer:
+### 负责识别相关的工作
+- start():开始识别
+- setOnStateChangedListener():设置状态改变监听器，当手势状态更改时会回调该监听器。
+- close():关闭识别，关闭识别后仍可以用start()在次开始。
+## 关于手势与动作的映射：
+manager将手势转化为动作，然后通过网络发送给另一个manager，这个manager在接收到动作后，使用controller.runAction()执行相应动作。
+## controller:
+- runAction(action):执行动作action
+- 这里的action用来表示如左移，放大，旋转等动作
+### controller抽象了命令实现的细节，使得在不同系统上只需改变controller的代码就可以实现相同的动作，其次，在改变了controller的代码后，无需修改其他代码。
+## manager:
+- addOnStateChangedListener():添加状态改变监听器。
+- get...():获取...信息。
+### manager负责管理会议，可向其询问会议信息，信息有两种获取方法：
+- 设置监听器，监听状态的改变
+- 直接使用对应的get()方法
+有些信息只实现这两种接口的一种以优化性能。
+## manager:
+- connect(meetingID):加入meetingID标识的会议
+- createMeeting(): 创建一个会议，返回meetingID。
+### 暂时只考虑一台机器只处于一个会议下。
