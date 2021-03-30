@@ -1,8 +1,8 @@
 
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QThread
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtChart import *
 
 import os
 import sys
@@ -10,6 +10,63 @@ import sys
 # 在引入父目录的模块之前加上如下代码：
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir)))
 from manager import *
+
+# 数据可视化界面
+class DataViewWindow(QWidget):
+    def __init__(self):
+        QWidget.__init__(self)
+        tabWidget = QTabWidget()
+        self.tabWidget = tabWidget
+
+        series0 = QLineSeries()
+        series1 = QLineSeries()
+        self.series0 = series0
+        self.series1 = series1
+
+        series0.append(1, 5)
+        series0.append(3, 7)
+        series0.append(7, 6)
+        series0.append(9, 7)
+        series0.append(16, 7)
+        series0.append(18, 5)
+        series1.append(1, 3)
+        series1.append(3, 4)
+        series1.append(7, 3)
+        series1.append(8, 2)
+        series1.append(16, 4)
+        series1.append(18, 3)
+
+        series = QAreaSeries(series0, series1)
+        series.setName("Batman")
+        pen = QPen(0x059605)
+        pen.setWidth(3)
+        series.setPen(pen)
+
+        gradient = QLinearGradient(QPointF(0,0),QPointF(0,1))
+        gradient.setColorAt(0.0, QColor(0x3cc63c))
+        gradient.setColorAt(1.0, QColor(0x26f626))
+        gradient.setCoordinateMode(QGradient.ObjectBoundingMode)
+        series.setBrush(gradient)
+
+        chart = QChart()
+        chart.addSeries(series)
+        chart.setTitle("Simple areachart example")
+        chart.createDefaultAxes()
+        chart.axes(Qt.Horizontal)[0].setRange(0, 20)
+        chart.axes(Qt.Vertical)[0].setRange(0, 10)
+
+        chartWidget = QWidget()
+        chartView = QChartView(chart)
+        chartView.setGeometry(0,0,100,100)
+        chartView.setRenderHint(QPainter.Antialiasing)
+
+        tabWidget.addTab(chartView,"batman")
+
+        tabWidget.setTabPosition(QTabWidget.West)
+        tabWidget.setTabShape(QTabWidget.Triangular)
+        layout = QVBoxLayout(self)
+        layout.addWidget(tabWidget)
+        self.setLayout(layout)
 
 # 状态显示条
 class StatusBar(QWidget):
@@ -41,8 +98,9 @@ class StatusBar(QWidget):
 
 # 会议界面
 class MeetingWindow(QWidget):
-    def __init__(self):
+    def __init__(self,mainWindow):
         QWidget.__init__(self)
+        self.mainWindow = mainWindow
 
         layout = QHBoxLayout(self)
         vLayout1 = QVBoxLayout()
@@ -52,13 +110,20 @@ class MeetingWindow(QWidget):
         self.setLayout(layout)
         vLayout1.addWidget(QLabel("aaa"))
         vLayout2.addWidget(QLabel("list"))
-        vLayout2.addWidget(QLabel("quit"))
+        dataViewButton = QPushButton("数据视图")
+        dataViewButton.clicked.connect(self.toDataView)
+        vLayout2.addWidget(dataViewButton)
+        vLayout2.addWidget(QPushButton("quit"))
+
         hLayout1 = QHBoxLayout()
         vLayout1.addLayout(hLayout1)
-        hLayout1.addWidget(QPushButton())
-        hLayout1.addWidget(QPushButton())
+        hLayout1.addWidget(QPushButton("开启手势识别"))
+        hLayout1.addWidget(QPushButton("接受远程手势操控"))
         self.statusBar = StatusBar()
         self.statusBar.show()
+
+    def toDataView(self):
+        self.mainWindow.setCentralWidget(DataViewWindow())
 
 
 
@@ -97,11 +162,11 @@ class InitWidget(QWidget):
     
     def joinMeeting(self):
         #self.mainWindow.manager.joinMeeting(self.lineEdit.text())
-        self.mainWindow.setCentralWidget(MeetingWindow())
+        self.mainWindow.setCentralWidget(MeetingWindow(self.mainWindow))
     def createMeeting(self):
         #self.thread = CreateMeetingThread(self.mainWindow.manager)
         #self.thread.start()
-        self.mainWindow.setCentralWidget(MeetingWindow())
+        self.mainWindow.setCentralWidget(MeetingWindow(self.mainWindow))
 
 class MainWindow(QMainWindow):
     def __init__(self):
