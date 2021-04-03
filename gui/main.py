@@ -86,16 +86,16 @@ class StatusBar(QWidget):
         self.setLayout(layout)
 
         leftLabel = QLabel()
-        leftPixmap = QPixmap("gui/left.png")
+        leftPixmap = QPixmap("gui/picture/left.png")
         leftLabel.setPixmap(leftPixmap)
         layout.addWidget(leftLabel, 1)
-        rightPixmap = QPixmap("gui/right.png")
+        rightPixmap = QPixmap("gui/picture/right.png")
         rightLabel = QLabel()
         rightLabel.setPixmap(rightPixmap)
         layout.addWidget(rightLabel, 1)
 
         clockLabel = QLabel()
-        clockPixmap = QPixmap("gui/clock_rotate.png")
+        clockPixmap = QPixmap("gui/picture/clock_rotate.png")
         clockLabel.setPixmap(clockPixmap)
         layout.addWidget(clockLabel, 1)
 
