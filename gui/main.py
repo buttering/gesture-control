@@ -72,12 +72,15 @@ class DataViewWindow(QWidget):
 class StatusBar(QWidget):
     def __init__(self):
         QWidget.__init__(self)
-        self.setMinimumWidth(300)
+        self.setMinimumWidth(100)
 
         # 设置这个标志可使窗口总是显示在前台
         # self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
         self.setWindowFlag(Qt.WindowStaysOnTopHint)
-        #self.setWindowFlag(Qt.FramelessWindowHint)
+
+        self.setWindowFlag(Qt.FramelessWindowHint)
+
+        self.setWindowOpacity(0.5)
 
         layout = QVBoxLayout(self)
         self.setLayout(layout)
@@ -161,11 +164,11 @@ class InitWidget(QWidget):
         self.setLayout(layout)
     
     def joinMeeting(self):
-        #self.mainWindow.manager.joinMeeting(self.lineEdit.text())
+        self.mainWindow.manager.joinMeeting(self.lineEdit.text())
         self.mainWindow.setCentralWidget(MeetingWindow(self.mainWindow))
     def createMeeting(self):
-        #self.thread = CreateMeetingThread(self.mainWindow.manager)
-        #self.thread.start()
+        self.thread = CreateMeetingThread(self.mainWindow.manager)
+        self.thread.start()
         self.mainWindow.setCentralWidget(MeetingWindow(self.mainWindow))
 
 class MainWindow(QMainWindow):
