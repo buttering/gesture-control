@@ -106,7 +106,7 @@ TODO:身份鉴权
     "gesture": [
         {
             "userid": 用户id（会议中每个与会者对应一条记录）
-            "click": 点击次数,
+            "click":点击次数,
             "panleft": 左移次数,
             "panreight": 右移次数,
             "enlarge":放大次数,
@@ -134,7 +134,7 @@ TODO:身份鉴权
     "gesture": [
         {
             "userid": 用户id（会议中每个与会者对应一条记录）
-            "click": 点击次数,
+            "click":  点击次数,
             "panleft": 左移次数,
             "panreight": 右移次数,
             "enlarge":放大次数,
@@ -159,7 +159,7 @@ TODO:身份鉴权
 }
 ```
 #### -get:获取用户信息
-#### -post：新增用户信息
+#### -post：修改用户信息
 
 ### https://zhaxzhax/wordcloud/{meetingid}
 #### -get：获得某次会议的词云图

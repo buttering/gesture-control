@@ -41,13 +41,13 @@ class WordCloudGenerator:
             mask=mask
 
         ).generate(words)
-        wc.to_file('wordCloud.png')
+        # wc.to_file('wordCloud.png')
+        #
+        # plt.imshow(wc)
+        # plt.axis('off')
+        # plt.show()
 
-        plt.imshow(wc)
-        plt.axis('off')
-        plt.show()
-
-
+    def analysis_content
 if __name__ == '__main__':
 
     wordcloud = WordCloudGenerator()

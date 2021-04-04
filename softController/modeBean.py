@@ -8,7 +8,7 @@ class modeBean:
     """存储当前软件模式(mode)中不同手势(gesture)所对应操作(operation)"""
 
     # 模式名
-    modeName = ""
+    __modeName = ""
 
     # 点击手势
     click = ""
@@ -30,6 +30,10 @@ class modeBean:
     custom1 = ""
     # 自定义手势2
     custom2 = ""
+
+    # TODO：所有属性的set和get
+    def getModeName(self):
+        return self.__modeName
 
     def __init__(self):
         jsonConfig.readMode(self, "init")

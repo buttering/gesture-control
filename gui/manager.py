@@ -5,7 +5,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir)))
 
 import config.socketConfig as socketConfig
-import server.socketServer as socketServer
+import server.SocketServer as socketServer
 from online_demo import newtest
 
 class Manager(object):
@@ -23,7 +23,7 @@ class Manager(object):
     # 创建会议
     # 默认发起者为讲解人员,启动socket服务器,并返回服务器实例和会议号meetingId
     def createMeeting(self):
-        server = socketServer.socketServer()
+        server = socketServer.SocketServer()
         server.runServer(self.__socketServerIp, self.__socketServerPort)
         # 这里死机了，runServer没有返回
         # TODO：会议号单独生成
