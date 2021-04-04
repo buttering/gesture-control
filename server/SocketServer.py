@@ -2,11 +2,12 @@ import socketserver
 import config.socketConfig as sc
 import json
 import server.gestureController
+import softController.modeBean
 from server import databaseUtil
 ip_port = (sc.IP, sc.PORT)
 
 
-class socketServer:
+class SocketServer:
 
     # 保存当前服务器实例
     server = None
@@ -29,7 +30,11 @@ class socketServer:
 
 class MyServer(socketserver.BaseRequestHandler):
 
-    gestureController = server.gestureController.gestureController()
+    modeBean = softController.modeBean.modeBean()
+    gestureController = server.gestureController.gestureController(modeBean)
+
+    def getModeBean(self):
+        return self.modeBean
 
     # 重写handle方法，决定每一个连接过来的操作
     def handle(self):
@@ -83,5 +88,5 @@ class MyServer(socketserver.BaseRequestHandler):
 
 
 if __name__ == '__main__':
-    socketServer = socketServer()
+    socketServer = SocketServer()
     socketServer.runServer("127.0.0.1", 9000)

@@ -41,15 +41,36 @@ class WordCloudGenerator:
             mask=mask
 
         ).generate(words)
-        wc.to_file('wordCloud.png')
+        # wc.to_file('wordCloud.png')
+        #
+        # plt.imshow(wc)
+        # plt.axis('off')
+        # plt.show()
 
-        plt.imshow(wc)
-        plt.axis('off')
-        plt.show()
+    # 根据字典生成svg格式词云图
+    def analysis_content_from_dict(self, frequency: dict):
+        wc = WordCloud(
+            # 设置字体，不然会出现口字乱码，文字的路径是电脑的字体一般路径，可以换成别的
+            font_path='wordCloud/SourceHanSansCN-Normal.ttf',
+            # 设置了背景，宽高
+            background_color="white",
+            width=1000,
+            height=880,
+        ).generate_from_frequencies(frequency)
 
+        svg = wc.to_svg()
+        return svg
 
 if __name__ == '__main__':
 
     wordcloud = WordCloudGenerator()
-    wordStr = wordcloud.cut_word()
-    wordcloud.analysis_content(wordStr)
+    # wordStr = wordcloud.cut_word()
+    # wordcloud.analysis_content(wordStr)
+
+    dic = {
+        'q23':11,
+        'sdfs':34,
+        'sdfdf':35
+    }
+
+    wordcloud.analysis_content_from_dict(dic)

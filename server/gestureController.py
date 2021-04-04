@@ -3,7 +3,9 @@ import softController.modeBean
 
 class gestureController:
 
-    __modeBean = softController.modeBean.modeBean()
+    def __init__(self, ModeBean):
+        # 由外部传入，保持单例
+        self.__modeBean = ModeBean
 
     # 为不同手势指定不同操作
     def callOperation(self, gesture: str) -> bool:
