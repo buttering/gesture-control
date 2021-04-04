@@ -3,7 +3,7 @@ import config.socketConfig as sc
 import time
 
 
-class socketClient:
+class SocketClient:
 
     __device_id = "sd545d4fs4df8sdf4"
     # TODO：获取设备唯一标识
@@ -104,7 +104,7 @@ class socketClient:
 
 
 if __name__ == '__main__':
-    socketClient = socketClient()
+    socketClient = SocketClient()
     socketClient.startUp(sc.IP, sc.PORT)
     # socketClient.gestureFilter("click")
     while True:

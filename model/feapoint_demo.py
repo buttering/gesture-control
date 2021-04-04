@@ -140,12 +140,12 @@ class gestureRecognize:
                 self.__last = cur
 
     # 启动socket客户端，与socket服务器进行连接
-    def startUpClient(self, ip: str, port: int) -> bool:
+    def startUpClient(self, ip: str = '127.0.0.1', port: int = 9000) -> bool:
         # 与服务器进行连接
         attempt = 5  # 网络连接尝试次数
         inteval = 1  # 重连间隔
         print("连接服务器中")
-        self.__client = socketClient.socketClient()
+        self.__client = socketClient.SocketClient()
         for i in range(attempt):
             if self.__client.startUp(ip, port):
                 break
@@ -314,5 +314,6 @@ class gestureRecognize:
 
 if __name__ == '__main__':
     gestureRecognize = gestureRecognize()
-    if gestureRecognize.startUpClient(socketConfig.IP, socketConfig.PORT):
+    # if gestureRecognize.startUpClient(socketConfig.IP, socketConfig.PORT):
+    if gestureRecognize.startUpClient():
         gestureRecognize.main()

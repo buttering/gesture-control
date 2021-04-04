@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
-from server.socketServer import *
+from server.SocketServer import *
 import config.socketConfig as sc
 import threading
 
@@ -43,8 +43,9 @@ class StatusBarWindow(QWidget):
 
 if __name__ == '__main__':
     def socket_server_start():
-        socket_server = socketServer()
-        socket_server.runServer(sc.IP, sc.PORT)
+        socket_server = SocketServer()
+        # socket_server.runServer(sc.IP, sc.PORT)
+        socket_server.runServer()
     thread = threading.Thread(target=socket_server_start)
     thread.start()
     app = QApplication(sys.argv)
