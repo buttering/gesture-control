@@ -224,14 +224,6 @@ def main():
                             idx_ = 2
                     else:
                         idx_ = np.argmax(out_put.cpu().numpy(), axis=1)[0]
-                        # idx_ = np.argmax(out_put.cpu().numpy())
-                        # print(idx_)
-
-                    # if HISTORY_LOGIT:
-                    #     history_logit.append(out_put.cpu().numpy())
-                    #     history_logit = history_logit[-12:]
-                    #     avg_logit = sum(history_logit)
-                    #     idx_ = np.argmax(avg_logit, axis=1)[0]
 
                     idx, history = process_output(idx_, history)
 
@@ -270,5 +262,5 @@ def main():
             cap.release()
             cv2.destroyAllWindows()
 
-
-main()
+if __name__ == '__main__':
+    main()
