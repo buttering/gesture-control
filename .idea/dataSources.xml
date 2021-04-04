@@ -15,5 +15,12 @@
       <jdbc-url>jdbc:sqlite:D:\GithubDesktop\gesture-control\server\gesture-control.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="GesturefControl-CloudServer" uuid="a1e6de59-5de7-4c65-b4ce-4df73eec792b">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\GithubDesktop\gesture-control\cloudServer\GesturefControl-CloudServer</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

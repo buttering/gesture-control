@@ -10,7 +10,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\cloudServer\dao.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\cloudServer\wordCloud.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\cloudServer\wordCloud\wordCloud.py">
           <value>
             <Attribute>
               <option name="separator" value="," />

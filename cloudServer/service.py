@@ -1,7 +1,8 @@
 from flask import Flask
+import controller
 
 app = Flask(__name__)
-
+conroller = controller.Controller()
 
 @app.route('/meeting/<int:meetingId>', methods=['get'])
 def addMeeting(meetingId):
@@ -30,7 +31,7 @@ def addUser(userId):
 
 @app.route('/wordcloud/<int:meetingId>', methods=['get'])
 def getWordCloud(meetingId):
-    pass
+    conroller.getWordCloud(meetingId)
 
 
 @app.route('/wordcloud/<int:meetingId>', methods=['post'])
