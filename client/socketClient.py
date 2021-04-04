@@ -45,12 +45,13 @@ class socketClient:
         return field
 
     # 生成焦点接口字段
-    def focus_interface_field(self, deviceid: str):
+    # def focus_interface_field(self, deviceid: str):
+    def focus_interface_field(self):
         field = '''
             {
                 "interface":"controlFocus",
                 "info":{
-                    "deviceid":"''' + deviceid + '''"
+                    "deviceid":"''' + self.__device_id + '''"
                 }
             }
         '''

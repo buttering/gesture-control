@@ -1,5 +1,5 @@
 /online_demo/mobilenetv2_jester_online.pth.tar
-
+/.idea/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
