@@ -3,8 +3,8 @@ from PyQt5.QtWidgets import *
 
 import sys
 
-from StatusBarWindow import StatusBarWindow
-from DataViewWindow import DataViewWindow
+from gui.StatusBarWindow import StatusBarWindow
+from gui.DataViewWindow import DataViewWindow
 
 
 # 会议界面
