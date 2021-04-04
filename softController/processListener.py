@@ -1,7 +1,8 @@
-import win32process, win32gui
-import psutil
 import time
 
+import psutil
+import win32gui
+import win32process
 
 processDict = {
     "POWERPNT.EXE": "ppt",
