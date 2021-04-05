@@ -82,9 +82,15 @@ class StatusBarWindow(QWidget):
 class GestureListener(object):
     def __init__(self, statusBarWindow):
         self.statusBarWindow = statusBarWindow
+        self.pixmap = []
+        self.pixmap.append(QPixmap("gui/picture/顺时针旋转1.png"))
+        self.pixmap.append(QPixmap("gui/picture/顺时针旋转.png"))
+        self.i = 0
     
     def gestureChanged(self, gesturename):
         print('gestureChanged',gesturename)
+        self.statusBarWindow.clockLabel.setPixmap(self.pixmap[self.i])
+        self.i = (self.i + 1) % 2
 
 if __name__ == '__main__':
 
