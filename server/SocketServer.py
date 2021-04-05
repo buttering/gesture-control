@@ -13,11 +13,12 @@ class SocketServer:
     server = None
 
     # 启动socket服务器
-    def runServer(self, ip = '127.0.0.1', port = 9000):
+    def runServer(self, listener, ip='127.0.0.1', port=9000):
         print("启动socket服务器...")
         try:
             # 定义服务端类型:支持ipv4的TCP协议的服务器
             self.server = socketserver.ThreadingTCPServer((ip, port), MyServer)
+            self.setListener(listener)
             # 持续循环运行
             self.server.serve_forever()
         except Exception:
@@ -27,6 +28,9 @@ class SocketServer:
     def terminateServer(self):
         self.server.server_close()
 
+    # 为手势控制器对象设置监听器，这样状态标识窗口动态接受消息
+    def setListener(self, listener):
+        self.server.RequestHandlerClass.gestureController.setListener(listener)
 
 class MyServer(socketserver.BaseRequestHandler):
 
@@ -66,7 +70,7 @@ class MyServer(socketserver.BaseRequestHandler):
         print("conn is :", self.request)  # conn
         print("addr is :", self.client_address)  # addr
 
-    # 解析字符串，重定向请求到不同控制器
+    # 解析字符串，重定向请求到不同控制器,调用listener对象
     def redirect(self, jsonStr: str) -> bool:
         jsonDict = json.loads(jsonStr)
         interface = jsonDict.get("interface")
@@ -89,4 +93,4 @@ class MyServer(socketserver.BaseRequestHandler):
 
 if __name__ == '__main__':
     socketServer = SocketServer()
-    socketServer.runServer("127.0.0.1", 9000)
+    socketServer.runServer(123, "127.0.0.1", 9000)

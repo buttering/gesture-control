@@ -46,7 +46,7 @@ class modeBean:
     def callOperation(self, gesture: str):
         #  这里是直接通过成员变量名获取值，所以传进参数必须严格一致
         operation = getattr(self, gesture, None)
-        print("mode:",self.modeName, ",operation:", operation, "is called")
+        print("mode:",self.__modeName, ",operation:", operation, "is called")
         if operation == "leftCtl":
             keyboardController.leftCtl()
         elif operation == "rightCtl":
@@ -88,11 +88,11 @@ if __name__ == '__main__':
     # time.sleep(2)
     # mode.callOperation(gesture)
     mode = modeBean()
-    print(mode.modeName, mode.click)
+    print(mode.getModeName(), mode.click)
     mode.callOperation("click")
-    print(mode.modeName, mode.click)
+    print(mode.getModeName(), mode.click)
     time.sleep(0.5)
     mode.callOperation("panRight")
     time.sleep(0.5)
     mode.callOperation("click")
-    print(mode.modeName, mode.click)
+    print(mode.getModeName(), mode.click)

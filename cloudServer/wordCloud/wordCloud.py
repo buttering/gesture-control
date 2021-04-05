@@ -30,7 +30,7 @@ class WordCloudGenerator:
         return dic
 
     def analysis_content(self, words):
-        mask = imread(self.mask_path)
+
         wc = WordCloud(
             # 设置字体，不然会出现口字乱码，文字的路径是电脑的字体一般路径，可以换成别的
             font_path='SourceHanSansCN-Normal.ttf',
@@ -38,10 +38,10 @@ class WordCloudGenerator:
             background_color="white",
             width=1000,
             height=880,
-            mask=mask
+
 
         ).generate(words)
-        # wc.to_file('wordCloud.png')
+        wc.to_file('wordCloud.png')
         #
         # plt.imshow(wc)
         # plt.axis('off')
@@ -64,13 +64,13 @@ class WordCloudGenerator:
 if __name__ == '__main__':
 
     wordcloud = WordCloudGenerator()
-    # wordStr = wordcloud.cut_word()
-    # wordcloud.analysis_content(wordStr)
-
-    dic = {
-        'q23':11,
-        'sdfs':34,
-        'sdfdf':35
-    }
-
-    wordcloud.analysis_content_from_dict(dic)
+    wordStr = wordcloud.cut_word()
+    wordcloud.analysis_content(wordStr)
+    #
+    # dic = {
+    #     'q23':11,
+    #     'sdfs':34,
+    #     'sdfdf':35
+    # }
+    #
+    # wordcloud.analysis_content_from_dict(dic)
