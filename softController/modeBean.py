@@ -35,6 +35,9 @@ class modeBean:
     def getModeName(self):
         return self.__modeName
 
+    def setModeName(self, modeName):
+        self.__modeName = modeName
+
     def __init__(self):
         jsonConfig.readMode(self, "init")
 

@@ -12,7 +12,6 @@ class gestureController:
 
     def setListener(self, listener):
         self.__listener = listener
-        print("listening:", listener)
 
     # 为不同手势指定不同操作
     def callOperation(self, gesture: str) -> bool:

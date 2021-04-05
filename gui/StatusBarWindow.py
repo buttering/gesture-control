@@ -95,6 +95,7 @@ if __name__ == '__main__':
         socket_server = SocketServer()
         # socket_server.runServer(sc.IP, sc.PORT)
         socket_server.runServer(gestureListener)
+
     thread = threading.Thread(target=socket_server_start)
     thread.start()
     win.show()

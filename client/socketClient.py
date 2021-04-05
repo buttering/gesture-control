@@ -10,7 +10,7 @@ class SocketClient:
 
     # 可用手势列表
     __gesture_list = ["click", "panLeft", "panRight", "enlarge", "narrow",
-                      "grasp", "cwr", "ccwr", "like", "unlike"]
+                      "grasp", "cwr", "ccwr", "like", "unlike", "focus"]
 
     # 保存tcp client实例
     __tcp_client = None

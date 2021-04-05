@@ -122,7 +122,7 @@ class gestureRecognize:
     __client = None
     __last = time.time()
     __gesture_list = ["Doing other things", "click", "No gesture",
-                      "panRight", "panLeft", "swipe up",
+                      "panRight", "panLeft", "focus",
                       "grasp", "enlarge", "narrow",
                       "cwr", "ccwr", "like", "unlike"]
 

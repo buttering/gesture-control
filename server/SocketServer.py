@@ -21,8 +21,9 @@ class SocketServer:
             self.setListener(listener)
             # 持续循环运行
             self.server.serve_forever()
-        except Exception:
-            print(Exception)
+        except Exception as e:
+            print(e)
+
 
     # 退出服务器
     def terminateServer(self):
