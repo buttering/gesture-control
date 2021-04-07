@@ -22,6 +22,8 @@ class gestureController:
             pass
         elif gesture == "unlike":
             pass
+        elif gesture == "focus":
+            pass
         else:
             self.__modeBean.callOperation(gesture)
         return True
