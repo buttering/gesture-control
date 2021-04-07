@@ -94,4 +94,4 @@ class MyServer(socketserver.BaseRequestHandler):
 
 if __name__ == '__main__':
     socketServer = SocketServer()
-    socketServer.runServer(123, "127.0.0.1", 9000)
+    socketServer.runServer(None, "127.0.0.1", 9000)

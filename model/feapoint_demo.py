@@ -116,7 +116,7 @@ def clear_buf():
 WINDOW_NAME = 'Video Gesture Recognition'
 
 
-class gestureRecognize:
+class GestureRecognize:
     # 保存客户端实例
     time_thre = 2
     __client = None
@@ -313,7 +313,7 @@ class gestureRecognize:
 
 
 if __name__ == '__main__':
-    gestureRecognize = gestureRecognize()
+    gestureRecognize = GestureRecognize()
     # if gestureRecognize.startUpClient(socketConfig.IP, socketConfig.PORT):
     if gestureRecognize.startUpClient():
         gestureRecognize.main()

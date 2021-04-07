@@ -243,7 +243,7 @@ class gestureRecognize:
         attempt = 5  # 网络连接尝试次数
         inteval = 1  # 重连间隔
         print("连接服务器中")
-        self.__client = socketClient.socketClient()
+        self.__client = socketClient.SocketClient()
         for i in range(attempt):
             if self.__client.startUp(ip, port):
                 break
