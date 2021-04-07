@@ -31,6 +31,14 @@ class MainWindow(QMainWindow):
         self.manager = Manager()
         initWindow = InitWindow(self)
         self.setCentralWidget(initWindow)
+        self.childWindows = {}
+        self.closeEvents= []
+    
+    def closeEvent(self, event):
+        for window in self.childWindows.values():
+            window.close()
+        for fun in self.closeEvents:
+            fun()
     
 
 if __name__ == '__main__':

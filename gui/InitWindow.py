@@ -39,11 +39,12 @@ class InitWindow(QWidget):
     def createMeeting(self):
         statusBarWindow = StatusBarWindow()
         statusBarWindow.show()
-        self.mainWindow.statusBarWindow = statusBarWindow
+        self.mainWindow.childWindows['statusBarWindow'] = statusBarWindow
+        socket_server = SocketServer()
         def socket_server_start():
             gestureListener = GestureListener(statusBarWindow)
-            socket_server = SocketServer()
             socket_server.runServer(gestureListener)
+        self.mainWindow.closeEvents.append(socket_server.terminateServer)
         thread = threading.Thread(target=socket_server_start)
         thread.start()
         self.mainWindow.setCentralWidget(MeetingWindow(self.mainWindow))
