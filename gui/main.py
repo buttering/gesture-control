@@ -6,13 +6,13 @@ from PyQt5.QtChart import *
 
 import sys
 
-# from manager import *
-# from MeetingWindow import MeetingWindow
-# from InitWindow import InitWindow
+from manager import *
+from MeetingWindow import MeetingWindow
+from InitWindow import InitWindow
 
-from multiprocessing import Manager
-from gui.MeetingWindow import MeetingWindow
-from gui.InitWindow import InitWindow
+#from multiprocessing import Manager
+#from gui.MeetingWindow import MeetingWindow
+#from gui.InitWindow import InitWindow
 
 
 

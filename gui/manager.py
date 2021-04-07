@@ -27,7 +27,8 @@ class Manager(object):
         server.runServer(self.__socketServerIp, self.__socketServerPort)
         # 这里死机了，runServer没有返回
         # TODO：会议号单独生成
-        meetingId = self.getMeetingId()
+        #meetingId = self.getMeetingId()
+        meetingId = '217.0.0.1'
         return server, meetingId
 
     # 通过会议号meetingId加入会议

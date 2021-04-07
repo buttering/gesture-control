@@ -3,10 +3,10 @@ from PyQt5.QtCore import QThread
 
 import sys
 
-# from manager import *
-# from MeetingWindow import MeetingWindow
-from multiprocessing import Manager
-from gui.MeetingWindow import MeetingWindow
+from manager import *
+from MeetingWindow import MeetingWindow
+#from multiprocessing import Manager
+#from gui.MeetingWindow import MeetingWindow
 
 class CreateMeetingThread(QThread):
     def __init__(self,manager):
