@@ -17,8 +17,7 @@ REFINE_OUTPUT = True
 '''
     现在的缺点，刚伸出手时容易误识别为swip right(已解决)，刚伸出双手容易误识别为zoom in（仍有小概率）
 '''
-# model_path = 'model/2021-03-19-14-34-56_acc90.pkl'  # best
-model_path = '2021-03-19-14-34-56_acc90.pkl'  # best
+model_path = 'model/2021-03-19-14-34-56_acc90.pkl'  # best
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 input_points = [0, 2, 4, 5, 8, 9, 12, 13, 16, 17, 20]
