@@ -25,12 +25,9 @@ class Manager(object):
 
     # 创建会议
     # 默认发起者为讲解人员,启动socket服务器,并返回服务器实例和会议号meetingId
-    def createMeeting(self):
+    def createMeeting(self, listener):
         server = socketServer.SocketServer()
-        server.runServer(listener=None)
-        # 这里死机了，runServer没有返回
-        # TODO：会议号单独生成
-        # meetingId = self.getMeetingId()
+        server.runServer(listener)
         meetingId = '127.0.0.1'
         return server, meetingId
 

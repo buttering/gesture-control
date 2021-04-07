@@ -5,15 +5,9 @@ import sys
 
 from manager import *
 from MeetingWindow import MeetingWindow
+from StatusBarWindow import *
 #from multiprocessing import Manager
 #from gui.MeetingWindow import MeetingWindow
-
-class CreateMeetingThread(QThread):
-    def __init__(self,manager):
-        QThread.__init__(self)
-        self.manager = manager
-    def run(self):
-        self.manager.createMeeting()  
 
 #这是初始界面
 #界面里选择是创建会议，还是加入会议
@@ -43,8 +37,15 @@ class InitWindow(QWidget):
         self.mainWindow.manager.joinMeeting(self.lineEdit.text())
         self.mainWindow.setCentralWidget(MeetingWindow(self.mainWindow))
     def createMeeting(self):
-        self.thread = CreateMeetingThread(self.mainWindow.manager)
-        self.thread.start()
+        statusBarWindow = StatusBarWindow()
+        statusBarWindow.show()
+        self.mainWindow.statusBarWindow = statusBarWindow
+        def socket_server_start():
+            gestureListener = GestureListener(statusBarWindow)
+            socket_server = SocketServer()
+            socket_server.runServer(gestureListener)
+        thread = threading.Thread(target=socket_server_start)
+        thread.start()
         self.mainWindow.setCentralWidget(MeetingWindow(self.mainWindow))
 
 if __name__ == '__main__':

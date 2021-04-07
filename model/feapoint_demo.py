@@ -5,6 +5,11 @@ import torch
 import torch.onnx
 from PIL import Image, ImageOps
 
+# 在引入父目录的模块之前加上如下代码：
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),os.pardir)))
+
 from client import socketClient
 from config import socketConfig
 from model.dnn import DNN

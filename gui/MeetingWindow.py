@@ -31,8 +31,7 @@ class MeetingWindow(QWidget):
         vLayout1.addLayout(hLayout1)
         hLayout1.addWidget(QPushButton("开启手势识别"))
         hLayout1.addWidget(QPushButton("接受远程手势操控"))
-        self.statusBar = StatusBarWindow()
-        self.statusBar.show()
+
 
     def toDataView(self):
         self.mainWindow.setCentralWidget(DataViewWindow())
