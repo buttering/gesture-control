@@ -4,6 +4,9 @@ from PyQt5.QtWidgets import QVBoxLayout
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QThread, QObject, pyqtSignal
+
+import time
 
 # 在引入父目录的模块之前加上如下代码：
 import sys
@@ -37,60 +40,50 @@ class StatusBarWindow(QWidget):
         layout = QVBoxLayout(self)
         self.setLayout(layout)
 
-        leftLabel = QLabel()
-        self.leftLabel = leftLabel
-        leftPixmap = QPixmap("gui/picture/左移.png")
-        leftLabel.setPixmap(leftPixmap)
-        layout.addWidget(leftLabel, 1)
-        rightPixmap = QPixmap("gui/picture/右移.png")
-        rightLabel = QLabel()
-        self.rightLabel = rightLabel
-        rightLabel.setPixmap(rightPixmap)
-        layout.addWidget(rightLabel, 1)
+        pictureNames = [                
+                "click",
+                "panLeft",
+                "panRight",
+                "enlarge",
+                "narrow",
+                "grasp",
+                "cwr",
+                "ccwr"]
+        pixmaps0 = {}
+        pixmaps1 = {}
+        for name in pictureNames:
+            pixmaps0[name] = QPixmap("gui/picture/"+name+'0.png')
+            pixmaps1[name] = QPixmap("gui/picture/"+name+'1.png')
+        self.pixmaps0 = pixmaps0
+        self.pixmaps1 = pixmaps1
 
-        clockLabel = QLabel()
-        self.clockLabel = clockLabel
-        clockPixmap = QPixmap("gui/picture/顺时针旋转.png")
-        clockLabel.setPixmap(clockPixmap)
-        layout.addWidget(clockLabel, 1)
-
-        anticlockLabel = QLabel()
-        self.anticlockLabel = anticlockLabel
-        anticlockPixmap = QPixmap("gui/picture/逆时针旋转.png")
-        anticlockLabel.setPixmap(anticlockPixmap)
-        layout.addWidget(anticlockLabel)
-
-        graspLabel = QLabel()
-        self.graspLabel = graspLabel
-        graspPixmap = QPixmap("gui/picture/抓取.png")
-        graspLabel.setPixmap(graspPixmap)
-        layout.addWidget(graspLabel)
-
-        zoominLabel = QLabel()
-        self.zoominlabel = zoominLabel
-        zoominPixmap = QPixmap("gui/picture/放大.png")
-        zoominLabel.setPixmap(zoominPixmap)
-        layout.addWidget(zoominLabel)
-
-        zoomoutLabel = QLabel()
-        self.zoomoutLabel = zoomoutLabel
-        zoomoutPixmap = QPixmap("gui/picture/缩小.png")
-        zoomoutLabel.setPixmap(zoomoutPixmap)
-        layout.addWidget(zoomoutLabel)
-
+        statusLabels = {}
+        self.statusLabels = statusLabels
+        for name in pictureNames:
+            label = QLabel()
+            statusLabels[name] = label
+            label.setPixmap(pixmaps0[name])
+            layout.addWidget(label, 1)
     
 class GestureListener(object):
     def __init__(self, statusBarWindow):
         self.statusBarWindow = statusBarWindow
-        self.pixmap = []
-        self.pixmap.append(QPixmap("gui/picture/顺时针旋转1.png"))
-        self.pixmap.append(QPixmap("gui/picture/顺时针旋转.png"))
-        self.i = 0
     
     def gestureChanged(self, gesturename):
         print('gestureChanged',gesturename)
-        self.statusBarWindow.clockLabel.setPixmap(self.pixmap[self.i])
-        self.i = (self.i + 1) % 2
+        label = self.statusBarWindow.statusLabels[gesturename]
+        pixmap = self.statusBarWindow.pixmaps1[gesturename]
+        pixmap0 = self.statusBarWindow.pixmaps0[gesturename]
+        label.setPixmap(pixmap)
+
+        def delay():
+            label0 = label
+            pixmap00 = pixmap0
+            time.sleep(1)
+            label0.setPixmap(pixmap00)
+        # Step 6: Start the thread
+        self.thread = threading.Thread(target=delay)
+        self.thread.start()
 
 if __name__ == '__main__':
 
