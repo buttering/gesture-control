@@ -17,6 +17,7 @@ REFINE_OUTPUT = True
 '''
     现在的缺点，刚伸出手时容易误识别为swip right(已解决)，刚伸出双手容易误识别为zoom in（仍有小概率）
 '''
+# model_path = 'model/2021-03-19-14-34-56_acc90.pkl'  # best
 model_path = '2021-03-19-14-34-56_acc90.pkl'  # best
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
@@ -289,6 +290,8 @@ class GestureRecognize:
                                     (0, int(height / 16)),
                                     cv2.FONT_HERSHEY_SIMPLEX,
                                     0.7, (0, 0, 0), 2)
+                        if current_time==0 :
+                            current_time = 1
                         cv2.putText(label, '{:.1f} Vid/s'.format(1 / current_time),
                                     (width - 170, int(height / 16)),
                                     cv2.FONT_HERSHEY_SIMPLEX,
