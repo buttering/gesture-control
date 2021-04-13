@@ -19,6 +19,7 @@ SOFTMAX_THRES = 0.99  # 输出手势的阈值
 HISTORY_LOGIT = True
 REFINE_OUTPUT = True
 
+
 '''
     现在的缺点，刚伸出手时容易误识别为swip right(已解决)，刚伸出双手容易误识别为zoom in（仍有小概率）
 '''
@@ -123,6 +124,7 @@ WINDOW_NAME = 'Video Gesture Recognition'
 
 class GestureRecognize:
     # 保存客户端实例
+    FLAG = 0  # 默认不开启手势识别
     time_thre = 2
     __client = None
     __last = time.time()
@@ -134,7 +136,10 @@ class GestureRecognize:
     def socket_out(self, output):
         if output == 2:
             self.__client.focus_interface_field()
-        if output not in [0, 2]:
+        if output == 5:
+            self.FLAG = not self.FLAG
+            print(self.FLAG)
+        elif output not in [0, 2] and self.FLAG:
             # 为有效手势
             cur = time.time()
             seg = cur - self.__last

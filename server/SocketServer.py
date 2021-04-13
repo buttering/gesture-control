@@ -81,7 +81,7 @@ class MyServer(socketserver.BaseRequestHandler):
             success = self.gestureController.callOperation(info["gesturename"])
             if success:
                 try:
-                    db = databaseUtil.databaseUtil()
+                    db = databaseUtil.atabaseUtil()
                     db.update_count(info["deviceid"], info["gesturename"])
                 except Exception as e:
                     print(e)

@@ -25,5 +25,10 @@ class gestureController:
         elif gesture == "focus":
             pass
         else:
-            self.__modeBean.callOperation(gesture)
+            # 网络接口和本地json文件间有两个字段（顺时针和逆时针旋转）定义的字符串不同
+            if gesture == 'cwr':
+                gesture = 'clockwiseRotation'
+            if gesture == 'ccwr':
+                gesture = 'counterClockwiseRotation'
+            self.__modeBean.callOpration(gesture)
         return True
