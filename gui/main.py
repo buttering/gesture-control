@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    QApplication.setStyle(QStyleFactory.create('Fusion'))
     win = MainWindow()
     win.show()
     app.exec_()
