@@ -154,7 +154,7 @@ class FramelessWindow(QWidget):
         super(FramelessWindow, self).__init__(*args, **kwargs)
         palette1 = QPalette()
         palette1.setBrush(self.backgroundRole(), QBrush(
-            QPixmap('gui/picture/background3.png')))  # 设置背景图片
+            QPixmap('gui/picture/background2.jfif')))  # 设置背景图片
         self.setPalette(palette1)
         self.setAutoFillBackground(True)
         self.setGeometry(300, 300, 250, 150)

@@ -16,6 +16,8 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QTextEdit
 from Header import TitleBar,FramelessWindow
 
+from main import MainWindow
+
 
 StyleSheet = """
 /*最小化最大化关闭按钮通用默认背景*/
@@ -108,8 +110,10 @@ QPushButton:hover {
 
 class loginWnd(QWidget):
     '''登录窗口'''
-    def __init__(self, *args, **kwargs):
+    def __init__(self, mainWindow, loginWindow):
         super(loginWnd, self).__init__()
+        self.mainWindow = mainWindow
+        self.loginWindow = loginWindow
         self._layout = QVBoxLayout(spacing=0)
         self._layout.setContentsMargins(0, 0, 0, 0)
         self.setAutoFillBackground(True)
@@ -141,6 +145,7 @@ class loginWnd(QWidget):
 
         login_btn = QPushButton("登录")
         login_btn.setStyleSheet(StyleSheet_btn)
+        login_btn.clicked.connect(self.login)
 
         self.main_layout.addWidget(name_label,0,0,1,1)
         self.main_layout.addWidget(passwd_label,1,0,1,1)
@@ -151,16 +156,22 @@ class loginWnd(QWidget):
 
         self._layout.addLayout(self.main_layout)
 
+    def login(self):
+            self.close()
+            self.loginWindow.close()
+            self.mainWindow.show()
+
 def main():
     ''':return:'''
 
     app = QApplication(sys.argv)
+    mainWindow = MainWindow()
 
     mainWnd = FramelessWindow()
     mainWnd.setWindowTitle('欢迎窗口login')
     mainWnd.setWindowIcon(QIcon('Qt.ico'))
     mainWnd.setFixedSize(QSize(500,400))  #因为这里固定了大小，所以窗口的大小没有办法任意调整，想要使resizeWidget函数生效的话要把这里去掉，自己调节布局和窗口大小
-    mainWnd.setWidget(loginWnd(mainWnd))  # 把自己的窗口添加进来
+    mainWnd.setWidget(loginWnd(mainWindow,mainWnd))  # 把自己的窗口添加进来
     mainWnd.show()
 
     app.exec()
