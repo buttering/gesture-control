@@ -48,6 +48,7 @@ class InitWindow(QWidget):
         thread = threading.Thread(target=socket_server_start)
         thread.start()
         self.mainWindow.setCentralWidget(MeetingWindow(self.mainWindow))
+        self.mainWindow.setHidden(True)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
