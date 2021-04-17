@@ -105,8 +105,8 @@ TODO:身份鉴权
     "author": 主持人,
     "gesture": [
         {
-            "userid": 用户id（会议中每个与会者对应一条记录）
-            "click":点击次数,
+            "userid": 用户id（会议中每个与会者对应一条记录）,
+            "click": 点击次数,
             "panleft": 左移次数,
             "panreight": 右移次数,
             "enlarge":放大次数,
@@ -133,7 +133,7 @@ TODO:身份鉴权
     "author": 主持人,
     "gesture": [
         {
-            "userid": 用户id（会议中每个与会者对应一条记录）
+            "userid": 用户id（会议中每个与会者对应一条记录）,
             "click":  点击次数,
             "panleft": 左移次数,
             "panreight": 右移次数,

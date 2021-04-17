@@ -30,5 +30,7 @@ class gestureController:
                 gesture = 'clockwiseRotation'
             if gesture == 'ccwr':
                 gesture = 'counterClockwiseRotation'
+            if gesture == 'grasp':
+                gesture = 'grab'
             self.__modeBean.callOperation(gesture)
         return True

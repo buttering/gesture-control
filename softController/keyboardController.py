@@ -151,7 +151,7 @@ def pptScreenGoBlack():
 
 def blankCtl():
     with kb.pressed(
-            keyboard.Key.blank
+            keyboard.Key.space
     ): pass
 
 
