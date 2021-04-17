@@ -124,7 +124,7 @@ WINDOW_NAME = 'Video Gesture Recognition'
 
 class GestureRecognize:
     # 保存客户端实例
-    FLAG = 0  # 默认不开启手势识别
+    FLAG = 1  # 默认不开启手势识别
     time_thre = 2
     __client = None
     __last = time.time()

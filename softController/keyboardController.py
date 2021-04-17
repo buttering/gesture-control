@@ -141,7 +141,10 @@ def volumeDownCtl(step: int = 5):
         with kb.pressed(
                 keyboard.Key.media_volume_down
         ): pass
-
+def pptScreenGoBlack():
+    with kb.pressed(
+            'b'
+    ): pass
 
 if __name__ == '__main__':
     main()

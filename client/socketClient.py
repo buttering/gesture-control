@@ -105,7 +105,7 @@ class SocketClient:
 
 if __name__ == '__main__':
     socketClient = SocketClient()
-    socketClient.startUp(sc.IP, sc.PORT)
+    socketClient.startUp("127.0.0.1", 9000)
     # socketClient.gestureFilter("click")
     while True:
         msg = input(">>>").strip()
