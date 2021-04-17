@@ -129,22 +129,31 @@ def enterCtl():
 
 
 # 增大系统音量，fn+f3
-def volumeUpCtl(step: int = 5):
+def volumeUpCtl(step: int = 20):
     for i in range(step):
         with kb.pressed(
                 keyboard.Key.media_volume_up
         ): pass
 
 
-def volumeDownCtl(step: int = 5):
+def volumeDownCtl(step: int = 20):
     for i in range(step):
         with kb.pressed(
                 keyboard.Key.media_volume_down
         ): pass
+
+
 def pptScreenGoBlack():
     with kb.pressed(
             'b'
     ): pass
+
+
+def blankCtl():
+    with kb.pressed(
+            keyboard.Key.blank
+    ): pass
+
 
 if __name__ == '__main__':
     main()

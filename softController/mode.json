@@ -58,5 +58,17 @@
         "counterClockwiseRotation": "",
         "custom1": "",
         "custom2": ""
+    },
+    "video": {
+        "click": "taskCtl",
+        "panLeft": "",
+        "panRight": "",
+        "enlarge": "volumeUpCtl",
+        "narrow": "volumeDownCtl",
+        "grab": "blankCtl",
+        "clockwiseRotation": "",
+        "counterClockwiseRotation": "",
+        "custom1": "",
+        "custom2": ""
     }
 }

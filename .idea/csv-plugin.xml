@@ -38,6 +38,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\config\socketConfig.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\gui\login.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\gui\main.py">
           <value>
             <Attribute>

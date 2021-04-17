@@ -27,7 +27,7 @@ class Manager(object):
     # 默认发起者为讲解人员,启动socket服务器,并返回服务器实例和会议号meetingId
     def createMeeting(self, listener):
         server = socketServer.SocketServer()
-        server.runServer(listener)
+        server.runServer(listener, )
         meetingId = '127.0.0.1'
         return server, meetingId
 

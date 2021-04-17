@@ -150,7 +150,7 @@ class GestureRecognize:
                 self.__last = cur
 
     # 启动socket客户端，与socket服务器进行连接
-    def startUpClient(self, ip: str = '127.0.0.1', port: int = 9000) -> bool:
+    def startUpClient(self, ip: str = socketConfig.IP, port: int = 9000) -> bool:
         # 与服务器进行连接
         attempt = 5  # 网络连接尝试次数
         inteval = 1  # 重连间隔

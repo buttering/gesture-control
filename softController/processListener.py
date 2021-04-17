@@ -7,7 +7,8 @@ import win32process
 processDict = {
     "POWERPNT.EXE": "ppt",
     "ApplicationFrameHost.exe": "picture",
-    "wemeetapp.exe": "tencent meeting"
+    "wemeetapp.exe": "tencent meeting",
+    "wmplayer.exe": "video"
 }
 
 # 获取当前焦点窗口的进程名

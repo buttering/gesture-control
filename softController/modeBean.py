@@ -83,6 +83,8 @@ class modeBean:
             keyboardController.volumeDownCtl()
         elif operation == "screenGoBlackCtl":
             keyboardController.pptScreenGoBlack()
+        elif operation == "blankCtl":
+            keyboardController.blankCtl()
 
 
 if __name__ == '__main__':

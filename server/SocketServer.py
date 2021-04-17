@@ -13,8 +13,8 @@ class SocketServer:
     server = None
 
     # 启动socket服务器
-    def runServer(self, listener, ip: str='127.0.0.1', port: int=9000):
-        print("启动socket服务器...")
+    def runServer(self, listener, ip: str=sc.IP, port: int=9000):
+        print("启动socket服务器...，ip地址：{}，端口号：{}".format(ip, port))
         try:
             # 定义服务端类型:支持ipv4的TCP协议的服务器
             self.server = socketserver.ThreadingTCPServer((ip, port), MyServer)
